@@ -9,12 +9,12 @@ import { toast } from "react-hot-toast";
 import { userHandle } from "Utils";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDA-axtTZq3whLmlN34G6X38e7B0WUAMvQ",
-  authDomain: "instagram-react-49d8b.firebaseapp.com",
-  projectId: "instagram-react-49d8b",
-  storageBucket: "instagram-react-49d8b.appspot.com",
-  messagingSenderId: "1088301944309",
-  appId: "1:1088301944309:web:0c2ac11462b5f0dd82e4bc",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

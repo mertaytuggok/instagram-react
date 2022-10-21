@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Input from "Components/Input";
+import Button from "Components/Button";
+import Separator from "Components/Separator";
 import { AiFillFacebook } from "react-icons/ai";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { login } from "firebase.js";
 import { Formik, Form } from "formik";
 import { LoginSchema } from "Validation/LoginSchema";
@@ -10,22 +12,19 @@ export const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const ref = useRef();
-
   useEffect(() => {
     let images = ref.current.querySelectorAll("img"),
       total = images.length,
       current = 0;
     const imageSlider = () => {
-      if (current > 0) {
-        images[(current > 0 ? current : total) - 1].classList.add("opacity-0");
-        images[current].classList.remove("opacity-0");
-        current = current === total - 1 ? 0 : current + 1;
-      }
-      imageSlider();
-      let interval = setInterval(imageSlider, 3000);
-      return () => {
-        clearInterval(interval);
-      };
+      images[(current > 0 ? current : total) - 1].classList.add("opacity-0");
+      images[current].classList.remove("opacity-0");
+      current = current === total - 1 ? 0 : current + 1;
+    };
+    imageSlider();
+    let interval = setInterval(imageSlider, 3000);
+    return () => {
+      clearInterval(interval);
     };
   }, [ref]);
 
@@ -37,11 +36,13 @@ export const Login = () => {
   ];
 
   const submitHandle = async (values, actions) => {
-    await login(values.username, values.password);
+    const response = await login(values.username, values.password);
 
-    navigate(location.state?.retutn_url || "/", {
-      replace: true,
-    });
+    if (response) {
+      navigate(location.state?.retutn_url || "/", {
+        replace: true,
+      });
+    }
   };
 
   return (
@@ -84,20 +85,13 @@ export const Login = () => {
                 />
                 <Input type="password" name="password" label="Password" />
 
-                <button
+                <Button
                   type="submit"
                   disabled={!isValid || !dirty || isSubmitting}
-                  className=" h-[30px] rounded bg-brand mt-1 text-white text-sm font-medium  disabled:opacity-50"
                 >
                   Log In
-                </button>
-                <div className=" flex items-center my-2.5 mb-3.5">
-                  <div className=" h-px bg-gray-300 flex-1" />
-                  <span className="px-4 text-[13px] text-gray-500 font-semibold ">
-                    OR
-                  </span>
-                  <div className=" h-px bg-gray-300 flex-1" />
-                </div>
+                </Button>
+                <Separator />
                 <a
                   href="#"
                   className=" flex justify-center mb-2.5 items-center gap-x-2 text-sm text-facebook font-semibold"
@@ -118,9 +112,9 @@ export const Login = () => {
 
         <div className=" bg-white border p-4 text-sm text-center">
           Don't have an account?{" "}
-          <a href="#" className="font-semibold text-brand">
+          <Link to="/auth/register" className="font-semibold text-brand">
             Sign up
-          </a>
+          </Link>
         </div>
       </div>
     </div>
