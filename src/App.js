@@ -1,5 +1,4 @@
 import Loader from "Components/Loader";
-import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useRoutes } from "react-router-dom";

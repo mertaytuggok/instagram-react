@@ -3,8 +3,11 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
   signOut,
 } from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 import { userHandle } from "Utils";
 
@@ -20,20 +23,71 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
+const db = getFirestore(app);
 
-onAuthStateChanged(auth, (user) => {
-  userHandle(user || false);
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const dbUser = await getDoc(doc(db, " users", user.uid));
+
+    let data = {
+      uid: user.uid,
+      fullName: user.displayName,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      ...dbUser.data(),
+    };
+    userHandle(data);
+  } else {
+    userHandle(false);
+  }
 });
 
+//--------------------Login----------------------
 export const login = async (email, password) => {
   try {
-    const responce = await signInWithEmailAndPassword(auth, email, password);
-    console.log(responce.user);
+    return await signInWithEmailAndPassword(auth, email, password);
   } catch (error) {
     toast.error(error.code);
   }
 };
 
+//-----------------Register----------------------
+export const register = async ({ email, password, full_name, username }) => {
+  try {
+    const user = await getDoc(doc(db, "usernames", username));
+    if (user.exits()) {
+      toast.error(`${username} kullanıcı adı başkası tarafından kullanıyor.`);
+    } else {
+      const responce = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (responce.user) {
+        await setDoc(doc(db, "usernames", username), {
+          user_id: responce.user.uid,
+        });
+        await setDoc(doc(db, "users", responce.user.uid), {
+          full_name,
+          username,
+          followers: [],
+          following: [],
+          notifications: [],
+        });
+        await updateProfile(auth.currentUser, {
+          displayName: full_name,
+        });
+
+        return responce.user;
+      }
+    }
+  } catch (error) {
+    toast.error(error.code);
+  }
+};
+
+//-------------------Logout----------------------
 export const logout = async () => {
   try {
     await signOut(auth);

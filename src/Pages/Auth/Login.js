@@ -3,13 +3,14 @@ import Input from "Components/Input";
 import Button from "Components/Button";
 import Separator from "Components/Separator";
 import { AiFillFacebook } from "react-icons/ai";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLocation, Link, Navigate } from "react-router-dom";
 import { login } from "firebase.js";
 import { Formik, Form } from "formik";
 import { LoginSchema } from "Validation/LoginSchema";
+import { useSelector } from "react-redux";
 
 export const Login = () => {
-  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
   const location = useLocation();
   const ref = useRef();
   useEffect(() => {
@@ -35,14 +36,11 @@ export const Login = () => {
     "https://www.instagram.com/static/images/homepage/screenshots/screenshot4-2x.png/8e9224a71939.png",
   ];
 
+  if (user) {
+    return <Navigate to={location.state?.retutn_url || "/"} replace={true} />;
+  }
   const submitHandle = async (values, actions) => {
-    const response = await login(values.username, values.password);
-
-    if (response) {
-      navigate(location.state?.retutn_url || "/", {
-        replace: true,
-      });
-    }
+    await login(values.username, values.password);
   };
 
   return (

@@ -2,17 +2,17 @@ import Input from "Components/Input";
 import Button from "Components/Button";
 import Separator from "Components/Separator";
 import { AiFillFacebook } from "react-icons/ai";
-import { useNavigate, useLocation } from "react-router-dom";
-import { login } from "firebase.js";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { register } from "firebase.js";
 import { Formik, Form } from "formik";
-import { LoginSchema } from "Validation/LoginSchema";
+import { RegisterSchema } from "Validation/RegisterSchema";
 
 export const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const submitHandle = async (values, actions) => {
-    const response = await login(values.username, values.password);
+    const response = await register(values);
 
     if (response) {
       navigate(location.state?.retutn_url || "/", {
@@ -30,10 +30,19 @@ export const Register = () => {
             src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png"
           />
         </a>
-        <p>Sign up to see photos and videos from your firends.</p>
+        <p className=" text-[17px] font-semibold text-[#8e8e8e] text-center mb-6 ">
+          Sign up to see photos and videos from your firends.
+        </p>
+        <Button>
+          <AiFillFacebook size={20} />
+          Log in with Facebook
+        </Button>
+        <Separator />
         <Formik
-          validationSchema={LoginSchema}
+          validationSchema={RegisterSchema}
           initialValues={{
+            email: "",
+            full_name: "",
             username: "",
             password: "",
           }}
@@ -41,39 +50,48 @@ export const Register = () => {
         >
           {({ isSubmitting, isValid, dirty, values }) => (
             <Form className="grid gap-y-1.5">
-              <Input name="username" label="Phone number, username or email" />
+              <Input name="email" label="Email" />
+              <Input name="full_name" label="Full Name" />
+              <Input name="username" label="Username" />
               <Input type="password" name="password" label="Password" />
-
+              <p className="text-xs text-[#8e8e8e] py-2">
+                People who use our service may have uploaded your contact
+                information to Instagram.{" "}
+                <a href="#" className="font-semibold">
+                  Learn More
+                </a>
+                <br />
+                <br />
+                By signing up, you agree to our{" "}
+                <a href="#" className="font-semibold">
+                  Terms
+                </a>
+                ,{" "}
+                <a href="#" className="font-semibold">
+                  Data Policy
+                </a>{" "}
+                and{" "}
+                <a href="#" className="font-semibold">
+                  Cookies Policy
+                </a>
+                .
+              </p>
               <Button
                 type="submit"
                 disabled={!isValid || !dirty || isSubmitting}
               >
-                Log In
+                Sign Up
               </Button>
-              <Separator />
-              <a
-                href="#"
-                className=" flex justify-center mb-2.5 items-center gap-x-2 text-sm text-facebook font-semibold"
-              >
-                <AiFillFacebook size={20} />
-                Log in with Facebook
-              </a>
-              <a
-                href="#"
-                className=" text-xs flex items-center text-link justify-center"
-              >
-                Forgot password?
-              </a>
             </Form>
           )}
         </Formik>
       </div>
 
       <div className=" bg-white border p-4 text-sm text-center">
-        Don't have an account?{" "}
-        <a href="#" className="font-semibold text-brand">
-          Sign up
-        </a>
+        Have an account?{" "}
+        <Link to="/auth/login" className="font-semibold text-brand">
+          Log in
+        </Link>
       </div>
     </div>
   );
