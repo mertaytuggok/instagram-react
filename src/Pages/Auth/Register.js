@@ -6,6 +6,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { register } from "firebase.js";
 import { Formik, Form } from "formik";
 import { RegisterSchema } from "Validation/RegisterSchema";
+import { Helmet } from "react-helmet";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -23,13 +24,16 @@ export const Register = () => {
 
   return (
     <div className="w-[350px] grid gap-y-3">
+      <Helmet>
+        <title>Register • Instagram</title>
+      </Helmet>
       <div className="  bg-white border px-[50px] pt-10 pb-6 ">
-        <a href="#" className="flex justify-center mb-4 ">
+        <div className="flex justify-center mb-4 ">
           <img
             className="h-[51px]"
             src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png"
           />
-        </a>
+        </div>
         <p className=" text-[17px] font-semibold text-[#8e8e8e] text-center mb-6 ">
           Sign up to see photos and videos from your firends.
         </p>
