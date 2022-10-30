@@ -3,7 +3,7 @@ import Sidebar from "./Components/Sidebar";
 
 export default function InboxLayout() {
   return (
-    <div className=" border border-gray-300 rounded flex bg-white h-[calc(100vh-97px)]  ">
+    <div className=" border border-gray-300 rounded  bg-white h-[calc(100vh-97px)] flex  ">
       <Sidebar />
       <Outlet />
     </div>

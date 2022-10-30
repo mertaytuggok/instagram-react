@@ -12,8 +12,9 @@ export default function Chat() {
   const [messages, setMessages] = useState([
     {
       from: {
-        id: "ndFdg2WGkQPS3VOBOvIbHOgORjL2",
+        id: "C9pQC9yI4FbSBAagbkdEcNVQL0J2",
         name: "Mert Aytuğ Gök",
+        username: "mertaytuggok",
         avatar:
           "https://pbs.twimg.com/profile_images/1091440211282837506/04o0DRyD_400x400.jpg ",
       },
@@ -24,6 +25,7 @@ export default function Chat() {
       from: {
         id: "7w42vtIHOhRn8tBP7uNd3wTnXn72",
         name: "Can Çatı",
+        username: "cancati",
         avatar:
           "https://pbs.twimg.com/profile_images/1437390988209709062/QLWTvO6h_400x400.jpg",
       },
@@ -33,6 +35,7 @@ export default function Chat() {
       from: {
         id: "7w42vtIHOhRn8tBP7uNd3wTnXn72",
         name: "Can Çatı",
+        username: "cancati",
         avatar:
           "https://pbs.twimg.com/profile_images/1437390988209709062/QLWTvO6h_400x400.jpg",
       },
@@ -42,6 +45,7 @@ export default function Chat() {
       from: {
         id: "7w42vtIHOhRn8tBP7uNd3wTnXn72",
         name: "Can Çatı",
+        username: "cancati",
         avatar:
           "https://pbs.twimg.com/profile_images/1437390988209709062/QLWTvO6h_400x400.jpg",
       },
@@ -49,8 +53,9 @@ export default function Chat() {
     },
     {
       from: {
-        id: "ndFdg2WGkQPS3VOBOvIbHOgORjL2",
+        id: "C9pQC9yI4FbSBAagbkdEcNVQL0J2",
         name: "Mert Aytuğ Gök",
+        username: "mertaytuggok",
         avatar:
           "https://pbs.twimg.com/profile_images/1091440211282837506/04o0DRyD_400x400.jpg ",
       },
@@ -61,6 +66,7 @@ export default function Chat() {
       from: {
         id: "7w42vtIHOhRn8tBP7uNd3wTnXn72",
         name: "Can Çatı",
+        username: "cancati",
         avatar:
           "https://pbs.twimg.com/profile_images/1437390988209709062/QLWTvO6h_400x400.jpg",
       },
