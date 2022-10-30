@@ -65,8 +65,8 @@ export const getUserInfo = async (uname) => {
 export const register = async ({ email, password, full_name, username }) => {
   try {
     const user = await getDoc(doc(db, "usernames", username));
-    if (user.exits()) {
-      toast.error(`${username} kullanıcı adı başkası tarafından kullanıyor.`);
+    if (user.exists()) {
+      toast.error(`${username} kullanıcı adı başkası tarafından kullanılıyor.`);
     } else {
       const responce = await createUserWithEmailAndPassword(
         auth,
@@ -79,8 +79,8 @@ export const register = async ({ email, password, full_name, username }) => {
           user_id: responce.user.uid,
         });
         await setDoc(doc(db, "users", responce.user.uid), {
-          full_name,
-          username,
+          full_name: full_name,
+          username: username,
           followers: [],
           following: [],
           notifications: [],

@@ -4,6 +4,7 @@ import Search from "./Search";
 import { logout } from "firebase.js";
 import Icon from "./Icon";
 import { useSelector } from "react-redux";
+import classNames from "classnames";
 export const Header = () => {
   const user = useSelector((state) => state.auth.user);
   return (
@@ -17,12 +18,16 @@ export const Header = () => {
         </Link>
         <Search />
 
-        <nav className=" flex items-center gap-x-6">
+        <nav className=" flex items-center gap-x-5">
           <NavLink to="/">
-            <Icon name="home" size={24} />
+            {({ isActive }) => (
+              <Icon name={isActive ? "Home-filled" : "Home"} size={24} />
+            )}
           </NavLink>
-          <NavLink to="/">
-            <Icon name="direct" size={24} />
+          <NavLink to="/inbox">
+            {({ isActive }) => (
+              <Icon name={isActive ? "direct-filled" : "direct"} size={24} />
+            )}
           </NavLink>
           <NavLink to="/">
             <Icon name="create" size={24} />
@@ -34,7 +39,15 @@ export const Header = () => {
             <Icon name="notifications" size={24} />
           </NavLink>
           <NavLink to={`/${user.username}`}>
-            <img src="./avatar.jpg" className="w-6 h-6 rounded-full" />
+            {({ isActive }) => (
+              <img
+                src="./avatar.jpg"
+                className={classNames({
+                  "w-6 h-6 rounded-full": true,
+                  "ring-1 ring-offset-1 ring-black": isActive,
+                })}
+              />
+            )}
           </NavLink>
         </nav>
       </div>
