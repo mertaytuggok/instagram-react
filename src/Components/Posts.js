@@ -5,6 +5,12 @@ import { Stories } from "./Stories";
 export const Posts = () => {
   const user = [
     {
+      userName: "mertaytuggok",
+      avatar:
+        "https://pbs.twimg.com/profile_images/1091440211282837506/04o0DRyD_400x400.jpg ",
+      post: "https://pbs.twimg.com/profile_images/1091440211282837506/04o0DRyD_400x400.jpg ",
+    },
+    {
       userName: "mcancati",
       avatar:
         "https://pbs.twimg.com/profile_images/1437390988209709062/QLWTvO6h_400x400.jpg",
@@ -15,12 +21,6 @@ export const Posts = () => {
       avatar:
         "https://pbs.twimg.com/profile_images/1362365661440315394/OL_xEE-e_400x400.jpg",
       post: "https://pbs.twimg.com/profile_images/1362365661440315394/OL_xEE-e_400x400.jpg",
-    },
-    {
-      userName: "mertaytuggok",
-      avatar:
-        "https://pbs.twimg.com/profile_images/1091440211282837506/04o0DRyD_400x400.jpg ",
-      post: "https://pbs.twimg.com/profile_images/1091440211282837506/04o0DRyD_400x400.jpg ",
     },
   ];
   return (
