@@ -61,7 +61,7 @@ export const Posts = () => {
                 8,563 likes
               </div>
               <div className="text-[#262626] justify-start font-semibold text-sm">
-                mcancati
+                {user.userName}
               </div>
               <div className="text-[#8e8e8e] justify-start font-normal text-sm">
                 Wiev all 103 comments

@@ -6,7 +6,7 @@ import Icon from "./Icon";
 export default function Search() {
   const [open, setOpen] = useState(false);
   return (
-    <div className=" w-[397px] h-full border-r border-gray-300 rounded-r-3xl   ">
+    <div className=" w-[397px] h-full border-r bg-white border-gray-300 rounded-r-3xl   ">
       <div className="grid justify-center items-center p-8 border-b border-gray-300">
         <div className="text-[22px] font-semibold  mb-8">Search</div>
         <div className="relative ">

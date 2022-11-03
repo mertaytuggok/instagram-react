@@ -10,11 +10,11 @@ export const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex h-full  ">
+    <div className="flex h-full ">
       <header
         className={classNames({
-          " flex  bg-white    w-[250px] h-[100vh] border-r border-gray-300  duration-500": true,
-          "w-[100px]": open,
+          " flex  bg-white w-[250px]  h-[100vh] border-r border-gray-300  duration-500": true,
+          "w-[100px] ": open,
         })}
       >
         <div
@@ -102,7 +102,7 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      {open && <Search className="h-full  " />}
+      {open && <Search className="h-full duration-500" />}
     </div>
   );
 };
